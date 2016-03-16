@@ -8,15 +8,16 @@ App = {
   },  
   wattsBy: function(priority){
     var watts = 0
-    $(this.items).each(function(index,item){
+    Array.prototype.forEach.call(this.items, function(item, i){
       if(item.priority == priority){
         watts += item.watts * item.hours
       }
+
     })
     return watts 
   },
   init: function(){   
-    $('#app').html(this.html())
+    $('#app').innerHTML = this.html()
     this.setEditable()
   },
   html: function(){
@@ -24,15 +25,18 @@ App = {
   },
   setState: function(){
     var items = []
-    $('#app table tr[data-row]').each(function(index, item){
-      var tds = $(item).find('td')
+    var elements = $s('#app table tr[data-row]');
+    //L(elements)
+    Array.prototype.forEach.call(elements, function(el, i){
+      var tds = el.querySelectorAll('td')
       items.push({
         name:     tds[0].innerText,
         priority: tds[1].innerText,
         watts:    tds[2].innerText,
         hours:    tds[3].innerText
       })
-    })
+    });    
+
     this.items = items
     store.set('items', this.items)
     this.init()
@@ -51,7 +55,7 @@ App = {
   },
   setEditable: function(){
 
-    var editable = $('[contenteditable="true"]');
+    var editable = $s('[contenteditable="true"]');
 
     addEvent(editable, 'blur', function () {
       App.setItemPriority(this)
@@ -64,7 +68,7 @@ App = {
     if(item.className == 'priority'){
       // only except these as priority
       var PRIORS = 'need,want,luxury'.split(',')
-      var value  = $.trim(item.innerText).toLowerCase()  
+      var value  = item.innerText.toLowerCase().trim()
       // defaults to
       var dValue = 'Need'
       if(value.indexOf('w') != -1){
