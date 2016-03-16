@@ -1,0 +1,9 @@
+table thead tr th{
+  text-align: left;
+}
+
+[contenteditable]:hover:not(:focus) {
+  outline: 1px dotted #ccc;
+}
+
+
