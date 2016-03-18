@@ -1,0 +1,31 @@
+
+<a name="hw"></a>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><h3 class="panel-title">Hardware</h3></div>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Priority</th>
+      <th>Watts</th>
+      <th>Hours</th>
+      <th>Watt Hours</th>     
+    </tr>
+  </thead>
+  <tbody>
+  {% var totalWatts = 0 ;%}
+  {% for (var i=0; i<o.length; i++) { %}
+      <tr data-row="{%= i %}">
+        <td contenteditable=true>{%= Db.Items[i].name %}</td>
+        <td contenteditable=true class="priority">{%= Db.Items[i].priority %}</td>
+        <td contenteditable=true>{%= Db.Items[i].watts %}</td>
+        <td contenteditable=true>{%= Db.Items[i].hours %}</td>
+        <td>{%= (Db.Items[i].hours * Db.Items[i].watts).toLocaleString() %}</td>
+      </tr>
+      {% totalWatts += (Db.Items[i].hours * Db.Items[i].watts); %}
+  {% } %}
+  <tr><td colspan="3"></td><td></td><td><b>{%= totalWatts.toLocaleString() %}</b></td></tr>
+  </tbody>
+  </table>
+</div>

@@ -1,14 +1,13 @@
 App = {
-  items: [],
+  Db: {},
   priorities: function(){
-    return this.items.map(function(item,index){
+    return this.Db.Items.map(function(item,index){
       return item.priority
     }).uniq()
-    //return Helper.uniq(prios);
   },  
   wattsBy: function(priority){
     var watts = 0
-    Array.prototype.forEach.call(this.items, function(item, i){
+    this.Db.Items.forEach(function(item, i){
       if(item.priority == priority){
         watts += item.watts * item.hours
       }
@@ -17,16 +16,16 @@ App = {
     return watts 
   },
   init: function(){   
-    $('#app').innerHTML = this.html()
+    $('#app').html(this.html())
     this.setEditable()
+    this.setRdo()
   },
   html: function(){
-    return tmpl("app-html", this.items);
+    return tmpl("app", this.Db);
   },
   setState: function(){
     var items = []
-    var elements = $s('#app table tr[data-row]');
-    //L(elements)
+    var elements = $('#pnlUsage table tr[data-row]');
     Array.prototype.forEach.call(elements, function(el, i){
       var tds = el.querySelectorAll('td')
       items.push({
@@ -37,31 +36,42 @@ App = {
       })
     });    
 
-    this.items = items
-    store.set('items', this.items)
+    this.Db.Items = items
+    store.set('db', this.Db)
     this.init()
   },
   setInitialState: function(){
     if (!store.enabled) {
-        console.log('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
-        this.items = Items
+        L('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
+        this.Db = Db
     }
-    if(store.get('items')){
-      this.items = store.get('items')
+    if(store.get('db')){
+      this.Db = store.get('db')
     } else {
-      store.set('items', Items)
-      this.items = store.get('items')
+      store.set('db', Db)
+      this.Db = Db
     }
   },
   setEditable: function(){
 
-    var editable = $s('[contenteditable="true"]');
+    var editable = $('[contenteditable="true"]');
 
     addEvent(editable, 'blur', function () {
       App.setItemPriority(this)
       App.setState()
     });  
 
+  },
+  setRdo: function(){
+    $('.rdo a').on('click', function(evt){
+      evt.preventDefault()
+      var name  = $(this).data('name')
+      var value = $(this).text()
+      App.Db[name]=value
+      store.set('db', App.Db)
+      App.init()
+      
+    })
   },
   setItemPriority: function(item){
     
@@ -86,17 +96,17 @@ App = {
   },
 
   save: function(){
-    var items  = store.get('items')
-    var sItems = JSON.stringify(items, null, 2)
-    $('#t-json').val(sItems)
+    var db  = store.get('db')
+    var sDb = JSON.stringify(db, null, 2)
+    $('#t-json').val(sDb)
     $('#d-json').toggle()
     document.getElementById('t-json').select()
   },
 
   update: function(){
     var text = $('#t-json').val()
-    var items = JSON.parse(text)
-        store.set('items', items)
+    var db   = JSON.parse(text)
+        store.set('db', db)
         location.reload()
 
   }

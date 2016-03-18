@@ -1,0 +1,13 @@
+<p><label>{%= o.name%}</label> {%= o.title%}</p>
+<div id="rdo{%= o.name%}" class="btn-group btn-group-justified rdo"
+  role="group" 
+  aria-label="Justified button group"> 
+  {% for(var i=0 ; i < o.options.length ; i++) { %}
+    {%
+      var option_class = 'default' ;
+      if(o.options[i] == o.value) option_class = 'primary'
+    %}
+    <a data-name="{%= o.name%}" 
+        href="#" class="btn btn-{%= option_class%}" role="button">{%= o.options[i] %}</a> 
+  {%}%}
+</div>

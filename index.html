@@ -2,84 +2,26 @@
 <html>
 <head>
   <title>Solar Plan</title>
-  <link rel="stylesheet" type="text/css" href="app.css">
-  <script type="text/javascript" src="store.js"></script>
-  <script type="text/javascript" src="zero.js"></script>
-  <script type="text/javascript" src="items.js"></script>
-  <script type="text/javascript" src="template.js"></script>
-  <script type="text/javascript" src="util.js"></script>
-  <script type="text/javascript" src="helpers.js"></script>
-  <script type="text/javascript" src="app.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/store.js"></script>
+  <script type="text/javascript" src="js/db.js"></script>
+  <script type="text/javascript" src="js/util.js"></script>
+  <script type="text/javascript" src="js/helpers.js"></script>
+  <script type="text/javascript" src="js/views.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
-  <div id="app"></div>
-  <p>
-    <a href="javascript:App.reset();">Reset</a>
-    |
-    <a href="javascript:App.save();">Save</a>
-  </p>
-  <div id="d-json" style="display:none" >
-      <p><a href="javascript:App.update();">Update</a></p>
-      <textarea rows="50" cols="50" id="t-json"></textarea>
-  </div>
 
-
-<script type="text/x-tmpl" id="app-html">
-<h1>Usage</h1>
-<table style="width:100%;">
-<thead>
-  <tr>
-    <th>Name</th>
-    <th>Priority</th>
-    <th>Watts</th>
-    <th>Hours</th>
-    <th>Watt Hours</th>
-    
-  </tr>
-</thead>
-<tbody>
-{% totalWatts = 0 ;%}
-{% for (var i=0; i<o.length; i++) { %}
-    <tr data-row="{%= i %}">
-      <td contenteditable=true>{%= o[i].name %}</td>
-      <td contenteditable=true class="priority">{%= o[i].priority %}</td>
-      <td contenteditable=true>{%= o[i].watts %}</td>
-      <td contenteditable=true>{%= o[i].hours %}</td>
-      <td>{%= o[i].hours * o[i].watts %}</td>
-    </tr>
-    {% totalWatts += (o[i].hours * o[i].watts); %}
-{% } %}
-<tr><td colspan="3"></td><td></td><td><b>{%= totalWatts %}</b></td></tr>
-
-</tbody>
-
-</table>
-
-<h2>Watt hour Totals</h2>
-<table style="width:100%;">
-<thead>
-  <tr>
-    <th>Priority</th>
-    <th>Watt Hours</th>    
-  </tr>
-</thead>
-<tbody>
-{% prios = App.priorities() ;%}
-
-{% for (var i=0; i < prios.length; i++) { %}
-    <tr>
-      <td>{%= prios[i]%}</td>
-      <td>{%= App.wattsBy(prios[i]) %}</td>
-    </tr>
-    
-{% } %}
-<tr><td></td><td><b>{%= totalWatts %}</b></td></tr>
-</tbody>
-</table>
-</script> 
-
+<div id="app"></div>
 
 <script type="text/javascript">
+  tmpl.arg = "Db"
   App.setInitialState()
   App.init()
 </script>
