@@ -1,3 +1,9 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+
 table thead tr th{
   text-align: left;
 }
@@ -6,13 +12,22 @@ table thead tr th{
   outline: 1px dotted #ccc;
 }
 
-.panel-heading h3 {
+[contenteditable="true"]{
+	color:green;
+}
+
+#pnlUsage table tr td.subtotal{
+	font-size: 10px;
+	color: #999;
+	text-align: right;
+}
+
+/*.panel-heading h3 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: normal;
     width: 75%;
     padding-top: 8px;
-}
-
+}*/
 

@@ -30,20 +30,17 @@ App = {
   },
   // Catch conenteditable for priority
   setItemPriority: function(item){
-    
-    if(item.className == 'priority'){
-      // only except these as priority
-      var PRIORS = 'need,want,luxury'.split(',')
-      var value  = item.innerText.toLowerCase().trim()
-      // defaults to
-      var dValue = 'Need'
-      if(value.indexOf('w') != -1){
-        dValue = 'Want'
-      } else if(value.indexOf('l') != -1 || value.indexOf('x') != -1){
-        dValue = 'Luxury'
-      }
-      item.innerText = dValue
+    // only except these as priority
+    var PRIORS = 'need,want,luxury'.split(',')
+    var value  = item.innerText.toLowerCase().trim()
+    // defaults to
+    var dValue = 'Need'
+    if(value.indexOf('w') != -1){
+      dValue = 'Want'
+    } else if(value.indexOf('l') != -1 || value.indexOf('x') != -1){
+      dValue = 'Luxury'
     }
+    item.innerText = dValue
   },  
   // Respond to clicking settings ui radios
   setRdo: function(){
@@ -82,7 +79,11 @@ App = {
     var editable = $('[contenteditable="true"]');
 
     addEvent(editable, 'blur', function () {
-      App.setItemPriority(this)
+      if(this.innerText == "") {
+        $(this).parent('tr').remove()
+      } else if(this.className == 'priority'){
+        App.setItemPriority(this)
+      }
       App.setState()
     });  
 
@@ -145,20 +146,20 @@ App = {
   },
 
   // Show json so it can be saved
-  save: function(){
-    var db  = store.get('db')
-    var sDb = JSON.stringify(db, null, 2)
-    $('#t-json').val(sDb)
-    $('#d-json').toggle()
-    document.getElementById('t-json').select()
-  },
+  // save: function(){
+  //   var db  = store.get('db')
+  //   var sDb = JSON.stringify(db, null, 2)
+  //   $('#t-json').val(sDb)
+  //   $('#d-json').toggle()
+  //   document.getElementById('t-json').select()
+  // },
 
   // Update json from a saved version
   update: function(){
-    var text = $('#t-json').val()
-    var db   = JSON.parse(text)
-        store.set('db', db)
-        location.reload()
+    var text = $('#txtJson').val();
+    var db   = JSON.parse(text);
+        store.set('db', db);
+        location.reload();
 
   }  
 

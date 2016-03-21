@@ -1,0 +1,30 @@
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="save-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Save</h4>
+      </div>
+      <div class="modal-body">
+          <div class="alert alert-info .alert-dismissible" role="alert">
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p>
+               Your changes are saved automatically via localstorage. However, if you want to permanantly save you plan, or share it with others, copy the JSON below.
+            </p>
+            <p>
+              If you have a copy, that you want to use, paste it below and click the 'Update' button below.
+            </p>
+          </div>
+            <textarea rows="30" cols="70" id="txtJson" style="width:100%">{%=JSON.stringify(o, null, 2)%}</textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="App.update()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
