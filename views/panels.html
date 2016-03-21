@@ -1,16 +1,44 @@
 <a name="panels"></a>
 <div class="panel panel-default">
-  <div class="panel-heading"><h3 class="panel-title">Panels</h3></div>
+  <div class="panel-heading">
+    <h3 class="panel-title">Panels</h3>
+  </div>
   <table class="table table-striped">
   <thead>
     <tr>
       <th>Priority</th>
       <th>Watts</th>
-      <th>Batts</th>
+      <th>Formula</th>
+      <th># of Panels</th>
     </tr>
   </thead>
   <tbody>
-
+  {% var prios = App.uniqPriorities(); %}
+  {% for(var i = 0 ; i < prios.length ; i++ ) { %}
+    <tr>
+      <td>{%= prios[i] %}</td>
+      <td>{%= App.sumOfWattsBy(prios[i]).toLocaleString() %}</td>
+      <td>
+        (
+        <span title="Watt Hours">{%= App.sumOfWattsBy(prios[i]).toLocaleString() %}</span> 
+        / 
+        (
+        <span title="Insolation">{%= o.Insolation %}</span> 
+        *
+        <span title="PanelSize">{%= o.PanelSize %}</span>
+        )
+        *
+        <span title="FudgeFactor">{%= o.FudgeFactor %}</span> 
+        ) + 
+        <span title="Round Up">1</span>
+      </td>
+      <td>
+        <span title="{%= App.numberOfPanels(prios[i]) %}">
+          {%= parseInt( App.numberOfPanels(prios[i]) + 1 )%}
+        </span>
+      </td>
+    </tr>
+  {%}%}   
   </tbody>
   </table>
 </div>

@@ -1,13 +1,13 @@
-{% include('nav', Db); %} 
+{% include('nav', o); %} 
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12">
-      {% include('usage', Db); %}
-      {% include('totals', Db); %} 
-      {% include('settings', Db); %}   
-      {% include('panels', Db); %}   
-      {% include('batts', Db); %}   
-      {% include('save', Db); %}        
+      {% include('usage', o); %}
+      {% include('panel-settings', o); %}   
+      {% include('panels', o); %}   
+      {% include('battery-settings', o); %}   
+      {% include('batts', o); %}   
+      {% include('save', o); %}        
     </div>
   </div>
 </div>

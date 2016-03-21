@@ -1,0 +1,27 @@
+<a name="settings"></a>
+
+<div class="panel panel-default" id="panelSettings">
+  <div class="panel-heading">
+     <h3 class="panel-title">Panel Settings</h3>
+   </div>
+   <div class="panel-body">
+      {% 
+        include('rdo', {
+            name: 'Insolation', 
+            value: o.Insolation, 
+            options: [1.5,2,2.5,3,3.5,4,4.5,5,5.5], 
+            title: 'Hours of sun your region receives'
+         }); 
+      %} 
+      <hr/>
+      {% 
+        include('rdo', {
+            name: 'FudgeFactor', 
+            value: o.FudgeFactor, 
+            options: [1,1.25,1.5,1.75], 
+            title: 'Acccount for inefficiencies of panels, controller, wiring, etc'
+         }); 
+      %}   
+  
+  </div>
+</div>      
