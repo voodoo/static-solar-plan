@@ -22,6 +22,9 @@ table thead tr th{
 	text-align: right;
 }
 
+.navbar-brand > img{
+  display:inline;
+}
 /*.panel-heading h3 {
     white-space: nowrap;
     overflow: hidden;

@@ -1,16 +1,34 @@
 <a name="batts"></a>
 <div class="panel panel-default">
-  <div class="panel-heading"><h3 class="panel-title">Batteries</h3></div>
+  <div class="panel-heading">
+    <span class="pull-right">
+      Multiplier: 
+      <b>{%= (App.battsMultiplier() * o.Autonomy).toLocaleString() %} </b>
+    </span>
+    <h3 class="panel-title">Batteries</h3>
+  </div>
   <table class="table table-striped">
   <thead>
     <tr>
       <th>Priority</th>
-      <th>Watts</th>
-      <th>Batts</th>
+      <th>Wh</th>
+      <th width="120">kWh</th>
     </tr>
   </thead>
   <tbody>
-
+  {% var prios = App.uniqPriorities(); %}
+  {% for(var i = 0 ; i < prios.length ; i++ ) { %}
+    <tr>
+      <td>{%= prios[i] %}</td>
+      <td>{%= App.sumOfWattsBy(prios[i]).toLocaleString() %}</td>
+      <td title="{%= App.numberOfPanels(prios[i]) %}">
+        {%= ((App.sumOfWattsBy(prios[i]) * App.battsMultiplier(prios[i]) * o.Autonomy) / 1000).toLocaleString() %}
+      </td>
+    </tr>
+  {%}%}   
   </tbody>
   </table>
 </div>
+
+
+

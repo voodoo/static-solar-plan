@@ -3,9 +3,10 @@ App = {
   Db: {},
   // Fire
   init: function(){   
+    this.setInitialState()
     $('#app').html(this.html())
-    this.setEditable()
-    this.setRdo()
+    UI.setEditable()
+    UI.setRdo()
   },
   // HTML for the app
   html: function(){
@@ -42,18 +43,7 @@ App = {
     }
     item.innerText = dValue
   },  
-  // Respond to clicking settings ui radios
-  setRdo: function(){
-    $('.rdo a').on('click', function(evt){
-      evt.preventDefault()
-      var name  = $(this).data('name')
-      var value = $(this).text()
-      App.Db[name]=value
-      store.set('db', App.Db)
-      App.init()
-      
-    })
-  },  
+ 
   // Fixme: bad terminology
   setState: function(){
     this.setUsageItems()
@@ -73,26 +63,7 @@ App = {
       this.Db = Db
     }
   },
-  // Reset items to be editable - since we lose them after repaint
-  setEditable: function(){
 
-    var editable = $('[contenteditable="true"]');
-
-    addEvent(editable, 'blur', function () {
-      if(this.innerText == "") {
-        $(this).parent('tr').remove()
-      } else if(this.className == 'priority'){
-        App.setItemPriority(this)
-      }
-      App.setState()
-    });  
-
-  },
-  // Fall back to default db values
-  reset: function(){
-    store.clear()
-    location.reload()
-  },
   newItem: function(){
     this.Db.Items.unshift({
       name:     'New Item',
@@ -145,6 +116,10 @@ App = {
     return (fudgedWatts / sunWattHours) + 1
   },
 
+  battsMultiplier: function(priority){
+    return (1 - (App.Db.DepthOfDischarge / 100)) + 1
+  },
+
   // Show json so it can be saved
   // save: function(){
   //   var db  = store.get('db')
@@ -161,7 +136,15 @@ App = {
         store.set('db', db);
         location.reload();
 
-  }  
+  },
+
+  // Fall back to default db values
+  reset: function(){
+    if(confirm("Really? This will erase your data and start over")){
+      store.clear()
+      location.reload()      
+    }
+  }
 
 }
 
