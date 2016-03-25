@@ -1,0 +1,19 @@
+{% var vs = Version.versions() ;%}
+Versions: 
+{% for(var i = 0 ; i < vs.length ; i++ ){ %}
+  <button onclick="Version.show({%=i%});">{%=i%}</button>
+{% } %}
+
+Total size of data: {%= Db.size().toLocaleString() %}
+
+<p>{%= Db.size() %}</p>
+
+
+<p>{%= Db.usagePercentage() %}</p>
+
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+  aria-valuemin="0" aria-valuemax="100" style="width:{%= Db.usagePercentage() %}%">
+    <span class="sr-only">{%= Db.usagePercentage() %}% Complete</span>
+  </div>
+</div>

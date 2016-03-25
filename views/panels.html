@@ -1,6 +1,11 @@
-<a name="panels"></a>
+{% include('panel-settings', o); %}
+
 <div class="panel panel-default">
   <div class="panel-heading">
+    <div class="pull-right" 
+        title="Insolation * PanelSize">
+          Panel Watts: <b>{%= Db.Data.PanelSize * Db.Data.Insolation %}</b>
+    </div>
     <h3 class="panel-title">Panels</h3>
   </div>
   <table class="table table-striped">
@@ -8,33 +13,20 @@
     <tr>
       <th>Priority</th>
       <th>Watts</th>
-      <th>Formula</th>
-      <th># of Panels</th>
+      <th>Fudged</th>
+      <th width="120"># of Panels</th>
     </tr>
   </thead>
   <tbody>
-  {% var prios = App.uniqPriorities(); %}
+  {% var prios = Watts.priorities; %}
   {% for(var i = 0 ; i < prios.length ; i++ ) { %}
     <tr>
       <td>{%= prios[i] %}</td>
-      <td>{%= App.sumOfWattsBy(prios[i]).toLocaleString() %}</td>
+      <td>{%= Watts.sumOfWattsBy(prios[i]).toLocaleString() %}</td>
+      <td>{%= (Watts.sumOfWattsBy(prios[i]) * Db.Data.FudgeFactor).toLocaleString() %}</td>
       <td>
-        (
-        <span title="Watt Hours">{%= App.sumOfWattsBy(prios[i]).toLocaleString() %}</span> 
-        / 
-        (
-        <span title="Insolation">{%= o.Insolation %}</span> 
-        *
-        <span title="PanelSize">{%= o.PanelSize %}</span>
-        )
-        *
-        <span title="FudgeFactor">{%= o.FudgeFactor %}</span> 
-        ) + 
-        <span title="Round Up">1</span>
-      </td>
-      <td>
-        <span title="{%= App.numberOfPanels(prios[i]) %}">
-          {%= parseInt( App.numberOfPanels(prios[i]) + 1 )%}
+        <span title="{%= Watts.numberOfPanels(prios[i]) %}">
+          {%= Math.ceil( Watts.numberOfPanels(prios[i]))%}
         </span>
       </td>
     </tr>

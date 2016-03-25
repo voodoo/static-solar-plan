@@ -5,31 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-<!--   <link rel="stylesheet" type="text/css" href="css/fork-me.css">
- -->  
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-  <link rel="stylesheet" type="text/css" href="css/app.css">
+  <script type="text/javascript" src="js/vendor/jquery.js"></script>
+  <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/vendor/store.js"></script>
+  <script type="text/javascript" src="js/vendor/script.js"></script>  
 
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/store.js"></script>
-
-  <script type="text/javascript" src="js/router.js"></script>
-  <script type="text/javascript" src="js/db.js"></script>
   <script type="text/javascript" src="js/util.js"></script>
+  <script type="text/javascript" src="js/router.js"></script>
+  
+  <script type="text/javascript" src="js/controllers/base_controller.js"></script>
+  <script type="text/javascript" src="js/controllers/items_controller.js"></script>
+
+  <script type="text/javascript" src="js/models/item.js"></script>
+
+  <script type="text/javascript" src="data/default.js"></script>
+  <script type="text/javascript" src="js/watts.js"></script>
+  <script type="text/javascript" src="js/db.js"></script>
   <script type="text/javascript" src="js/views.js"></script>
-  <script type="text/javascript" src="js/ui.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
 
-<div id='view'></div>
-<div id="app" style=display:none></div>
 
-<script type="text/javascript">
-  App.init()
-</script>
+  <div id="app"></div>
+
+  <script type="text/javascript">
+    App.init()
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="css/app.css">
 
 
 

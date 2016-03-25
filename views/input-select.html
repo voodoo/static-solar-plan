@@ -1,0 +1,11 @@
+<div class="form-group">
+  <label class="control-label col-sm-2" for="{%= o.name%}">{%= o.title %}:</label>
+  <div class="col-sm-10">
+    <select name="{%= o.name %}" class='form-control'>
+      {% for(var i=0 ; i < o.options.length ; i++) { %}
+        {% var selected = o.options[i] == o.value ? 'selected' : ''; %}
+        <option {%= selected %}>{%= o.options[i] %}</option>
+      {%}%}
+    </select>
+  </div>
+</div>

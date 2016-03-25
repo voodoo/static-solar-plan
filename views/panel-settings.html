@@ -7,27 +7,27 @@
    <div class="panel-body">   
 
       {% 
-        include('rdo', {
+        include('input-radio', {
             name: 'PanelSize', 
-            value: o.PanelSize, 
+            value: Db.Data.PanelSize, 
             options: [50,75,100,150,200,250,275,300,325], 
             title: 'Size of your panels in watts'
          }); 
       %} 
       <hr/>
       {% 
-        include('rdo', {
+        include('input-radio', {
             name: 'Insolation', 
-            value: o.Insolation, 
+            value: Db.Data.Insolation, 
             options: [1,2,3,4,5,6], 
             title: 'Number of hours your region receives'
          }); 
       %} 
       <hr/>
       {% 
-        include('rdo', {
+        include('input-radio', {
             name: 'FudgeFactor', 
-            value: o.FudgeFactor, 
+            value: Db.Data.FudgeFactor, 
             options: [1,1.1,1.25,1.4,1.5,1.75,2], 
             title: 'Acccount for inefficiencies of panels, controller, wiring, etc'
          }); 
@@ -36,4 +36,4 @@
   
 
   </div>
-</div>      
+</div>   

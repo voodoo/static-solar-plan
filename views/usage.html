@@ -2,49 +2,52 @@
 
 <div class="panel panel-default" id="pnlUsage">
   <div class="panel-heading">
-    <a href="#" onclick="App.newItem()" class='btn btn-success btn-sm pull-right'>New</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#/item/new" 
+        class='btn btn-success btn-sm pull-right'>New</a>
     <h3 class="panel-title pull-left">
       Usage <small>of appliances</small>
     </h3>
     <div class="clearfix"></div>
   </div>
-  <table class="table table-striped">
+  <table class="table table-hover table-bordered">
   <thead>
     <tr>
       <th>Name</th>
-      <th title="Need, Want or Luxury">Priority</th>
       <th>Watts</th>
       <th>Hours</th>
+      <th title="Need, Want or Luxury">Priority</th>
+
       <th width="140">Watt Hours</th>     
     </tr>
   </thead>
   <tbody>
   {% var totalWatts = 0 ;%}
-  {% var index = 0 ;%}
-  {% var prios = App.uniqPriorities() ;%}
+  {% var prios = Watts.priorities ;%}
   {% for(var i = 0 ; i < prios.length ; i++ ){ %}
-    {% var usageItems = App.itemsBy(prios[i]) ; %}
-    {% for(var ui = 0 ; ui < usageItems.length ; ui++ ){ %}
-      <tr data-row="{%= index %}">
-        <td contenteditable=true>{%= usageItems[ui].name %}</td>
-        <td contenteditable=true class="priority">{%= usageItems[ui].priority %}</td>
-        <td contenteditable=true>{%= usageItems[ui].watts %}</td>
-        <td contenteditable=true>{%= usageItems[ui].hours %}</td>
-        <td >{%= (usageItems[ui].hours * usageItems[ui].watts).toLocaleString() %}</td>
+    {% var usageItems = Watts.itemsBy(prios[i]) ; %}
+    {% if( usageItems.length > 0 ) { %}
+      {% for(var ui = 0 ; ui < usageItems.length ; ui++ ){ %}
+        <tr onclick="document.location='#/item/{%= usageItems[ui].id %}'">
+          <td >{%= usageItems[ui].name %}</td>
+          <td >{%= usageItems[ui].watts %}</td>
+          <td >{%= usageItems[ui].hours %}</td>
+          <td >{%= usageItems[ui].priority %}</td>
+          <td >{%= (usageItems[ui].hours * usageItems[ui].watts).toLocaleString() %}</td>
+        </tr>
+       {% totalWatts += (usageItems[ui].hours * usageItems[ui].watts); %}
+     {% } %}
+     <tr>
+        <td class="subtotal" colspan="4">
+          {% if(prios[i] == 'Want') { %}
+            ({%= Watts.byPriority('Need').toLocaleString() %} + <b>{%= Watts.byPriority('Want').toLocaleString()%}</b> )
+          {% } %}
+          {% if(prios[i] == 'Luxury') { %}
+            ({%= Watts.byPriority('Need').toLocaleString() %} + {%= Watts.byPriority('Want').toLocaleString() %} + <b>{%= Watts.byPriority('Luxury').toLocaleString() %}</b>)
+          {% } %}        
+        </td>
+        <td><b>{%= Watts.sumOfWattsBy(prios[i]).toLocaleString() %}</b></td>
       </tr>
-     {% index += 1; %}
-     {% totalWatts += (usageItems[ui].hours * usageItems[ui].watts); %}
-   {% } %}
-   <tr>
-      <td class="subtotal" colspan="4">
-        {% if(prios[i] == 'Want') { %}
-          ({%= App.wattsBy('Need').toLocaleString() %} + <b>{%= App.wattsBy('Want').toLocaleString()%}</b> )
-        {% } %}
-        {% if(prios[i] == 'Luxury') { %}
-          ({%= App.wattsBy('Need').toLocaleString() %} + {%= App.wattsBy('Want').toLocaleString() %} + <b>{%= App.wattsBy('Luxury').toLocaleString() %}</b>)
-        {% } %}        
-      </td>
-      <td><b>{%= App.sumOfWattsBy(prios[i]).toLocaleString() %}</b></td></tr>
+    {% } %}
 
   {% } %}
  </tbody>
