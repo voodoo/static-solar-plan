@@ -1,7 +1,6 @@
-function Item(name, watts, hours, priority,id){
+function Item(name, watts, hours, priority){
   this.name     = name       || "Item Name"
   this.watts    = watts      || 100
-  this.hours    = watts      || 1
+  this.hours    = hours      || 1
   this.priority = priority   || 'Need'
-  this.id       = id         || 'new'
 }

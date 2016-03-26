@@ -22,12 +22,13 @@
   </thead>
   <tbody>
   {% var totalWatts = 0 ;%}
+  {% var index      = 0 ;%}
   {% var prios = Watts.priorities ;%}
   {% for(var i = 0 ; i < prios.length ; i++ ){ %}
     {% var usageItems = Watts.itemsBy(prios[i]) ; %}
     {% if( usageItems.length > 0 ) { %}
       {% for(var ui = 0 ; ui < usageItems.length ; ui++ ){ %}
-        <tr onclick="document.location='#/item/{%= usageItems[ui].id %}'">
+        <tr onclick="document.location='#/item/{%= index %}'">
           <td >{%= usageItems[ui].name %}</td>
           <td >{%= usageItems[ui].watts %}</td>
           <td >{%= usageItems[ui].hours %}</td>
@@ -35,6 +36,7 @@
           <td >{%= (usageItems[ui].hours * usageItems[ui].watts).toLocaleString() %}</td>
         </tr>
        {% totalWatts += (usageItems[ui].hours * usageItems[ui].watts); %}
+       {% index++ ;%}
      {% } %}
      <tr>
         <td class="subtotal" colspan="4">

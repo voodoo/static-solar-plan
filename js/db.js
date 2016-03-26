@@ -1,5 +1,4 @@
 var Db = {
-
   Data: null,
   init: function(){
     if (!store.enabled) {
@@ -10,16 +9,10 @@ var Db = {
       this.Data = store.get('db')
     } else {
       L('initting Db.Data')
-      this.initItemIds()
       this.Data = Data
       store.set('db', Data)
     }
   },  
-  initItemIds: function(){
-    Data.Items.forEach(function(item){                                         
-      item.id = new Date().getTime() + item.name.replace(' ','-') // add name to make 'uniq'
-    })
-  },
   save: function(data){
     if("Version" in window){
       Version.add(this.Data)
@@ -35,15 +28,6 @@ var Db = {
         location.reload();
 
   },
-
-  MAX_SIZE: 50000,
-  size: function(){
-    return JSON.stringify(store.getAll()).length
-  },
-  usagePercentage: function(){
-    return parseInt(this.MAX_SIZE / this.size())
-  },
-
   // Fall back to default db values
   reset: function(){
     if(confirm("Really? This will erase your data and start over")){

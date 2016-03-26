@@ -1,55 +1,60 @@
 var ItemsController = {
-  render:  function(id){
+  currentIndex: null,
+  render:  function(index){
+    this.currentIndex = index
     var item = null
-    if(id == 'new'){
+    if(index == 'new'){
       item = new Item()
     } else {
-      item = this.find(id)
+      item = Db.Data.Items[index]
     }
     
     $('#view').html(tmpl('item', item))
   },
-  find: function(id){
-    function finder(el){
-      return el.id == id
-    }
-    return Db.Data.Items.find(finder)
+  isNew: function(){
+    return this.currentIndex === 'new'
   },
-
   destroy: function(id){
     // FIXME: WTH Javascript // tried slice(id,1)
-    var item = this.find(id) 
-    var idx  = Db.Data.Items.indexOf(item)
-    delete Db.Data.Items[idx]
+    delete Db.Data.Items[id]
     Db.Data.Items = Db.Data.Items.filter(Boolean)
     Db.save()
     document.location = '#/usage'    
   },
   update: function(id){
     var frm = $('#frmItem')[0]
-    var item = this.find(id)
-         .name  = frm.name.value
-         .watts =   frm.watts.value
-         .hours = frm.hours.value
-         .priority = $(frm.priority).val()
-
-
+    var item = Db.Data.Items[id]
+        item.name  =     frm.name.value
+        item.watts =     frm.watts.value
+        item.hours =     frm.hours.value
+        item.priority =  $(frm.priority).val()
+    this.orderItems()
     Db.save()
     document.location = '#/usage'
   },
   create: function(){
-    var id = new Date().getTime()
-    L(id)
     var frm = $('#frmItem')[0]
     var item = new Item(
           frm.name.value, 
           frm.watts.value,
           frm.hours.value,
-          $(frm.priority).val(), 
-          id)
+          $(frm.priority).val())
 
     Db.Data.Items.push(item)
+    this.orderItems()
     Db.save()
     document.location = '#/usage'
   },  
+  orderItems: function(){
+    var orderedItems = []
+    Watts.priorities.forEach(function(p){
+      Watts.itemsBy(p).forEach(function(i){
+        orderedItems.push(i)
+      })
+    })
+
+    Db.Data.Items = orderedItems
+    return orderedItems
+
+  }  
 }

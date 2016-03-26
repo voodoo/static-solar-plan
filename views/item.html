@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title"> 
-      {%= o.id == 'new' ? 'New' : 'Edit' %}
+      {%= ItemsController.isNew() ? 'New' : 'Edit'  %}
       Item
     </h3>
   </div>
@@ -52,17 +52,18 @@
   <div class="panel-footer">
     <div class="row">
       <div class="col-sm-2">
-        {% if(o.id != 'new'){ %}
+      <p/>
+        {% if(!ItemsController.isNew()){ %}
           <button type="button" class="btn btn-warning" 
-                onclick="ItemsController.destroy('{%= o.id %}')">
+                onclick="ItemsController.destroy('{%= ItemsController.currentIndex %}')">
             Delete
           </button>
         {% } %}        
       </div>
       <div class="col-sm-10">
-        {% if(o.id != 'new'){ %}
+        {% if(!ItemsController.isNew()){ %}
          <button type="button" class="btn btn-primary" 
-                onclick="ItemsController.update('{%= o.id %}')">
+                onclick="ItemsController.update('{%= ItemsController.currentIndex %}')">
           Update
         </button>
         {% }  else { %}
