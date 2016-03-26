@@ -4,7 +4,7 @@
 
 1) Avoid javascript framework fatigue
 
-2) The simplest, modern client side app possible
+2) The simplest, modern, client side app possible
 
 3) Run from the filesystem (avoid ajax)
 
@@ -16,7 +16,8 @@
 
 ## Dependencies
 
-* Compile template views https://github.com/blueimp/JavaScript-Templates#compiled-templates
+* Compile template views:  https://github.com/blueimp/JavaScript-Templates#compiled-templates
+* https://github.com/vol4ok/nwatch/blob/master/fswatch.rb
 * https://github.com/marcuswestin/store.js/
 
 ### Jquery and bootstrap
