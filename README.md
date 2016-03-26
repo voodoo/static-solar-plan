@@ -3,10 +3,15 @@
 ## Goals
 
 1) Avoid javascript framework fatigue
+
 2) The simplest, modern client side app possible
+
 3) Run from the filesystem (avoid ajax)
+
 4) Use localstorage https://github.com/marcuswestin/store.js/
+
 5) Client templating https://github.com/blueimp/JavaScript-Templates
+
 6) *Learn about electricity and solar*
 
 ## Dependencies
