@@ -3,7 +3,7 @@ var ItemsController = {
   render:  function(index){
     this.currentIndex = index
     var item = null
-    if(index == 'new'){
+    if(index === 'new'){
       item = new Item()
     } else {
       item = Db.Data.Items[index]
@@ -14,11 +14,14 @@ var ItemsController = {
   isNew: function(){
     return this.currentIndex === 'new'
   },
+  save: function(){
+    Db.save()
+  },
   destroy: function(id){
     // FIXME: WTH Javascript // tried slice(id,1)
     delete Db.Data.Items[id]
     Db.Data.Items = Db.Data.Items.filter(Boolean)
-    Db.save()
+    this.save()
     document.location = '#/usage'    
   },
   update: function(id){
@@ -29,7 +32,7 @@ var ItemsController = {
         item.hours =     frm.hours.value
         item.priority =  $(frm.priority).val()
     this.orderItems()
-    Db.save()
+    this.save()
     document.location = '#/usage'
   },
   create: function(){
@@ -42,7 +45,7 @@ var ItemsController = {
 
     Db.Data.Items.push(item)
     this.orderItems()
-    Db.save()
+    this.save()
     document.location = '#/usage'
   },  
   orderItems: function(){

@@ -33,6 +33,16 @@
          }); 
       %}   
        
+      <hr/>
+      {% 
+        include('input-radio', {
+            name: 'CostForGridTiedSystem', 
+            value: Db.Data.CostForGridTiedSystem, 
+            options: [2,2.5,3,3.5,4,4.5,5], 
+            title: 'Cost of a grid-tied system per panel watt'
+         }); 
+      %}   
+
   
 
   </div>

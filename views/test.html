@@ -1,0 +1,17 @@
+
+<h1>Test Results</h1>
+<table class="table table-striped">
+<thead>
+  <th>Action</th>
+  <th>Expectation</th>
+  <th>Result</th>
+</thead>
+{% var tests = o.tests ;%}
+{% for(var i = 0 ; i < tests.length ; i++){ %}
+  <tr>
+    <td>{%= tests[i].action %}</td>
+    <td>{%= tests[i].expectation %}</td>
+    <td>{%= tests[i].result %}</td>
+  </tr>
+{% } %}
+</table>

@@ -52,9 +52,8 @@
   <div class="panel-footer">
     <div class="row">
       <div class="col-sm-2">
-      <p/>
         {% if(!ItemsController.isNew()){ %}
-          <button type="button" class="btn btn-warning" 
+          <button type="button" class="btn btn-warning btn-sm" 
                 onclick="ItemsController.destroy('{%= ItemsController.currentIndex %}')">
             Delete
           </button>
@@ -62,17 +61,17 @@
       </div>
       <div class="col-sm-10">
         {% if(!ItemsController.isNew()){ %}
-         <button type="button" class="btn btn-primary" 
+         <button type="button" class="btn btn-primary btn-sm" 
                 onclick="ItemsController.update('{%= ItemsController.currentIndex %}')">
           Update
         </button>
         {% }  else { %}
-         <button type="button" class="btn btn-primary" 
+         <button type="button" class="btn btn-primary btn-sm" 
                 onclick="ItemsController.create()">
           Create
         </button>
         {% } %}
-        <button type="button" class="btn btn-default" 
+        <button type="button" class="btn btn-default btn-sm" 
                 onclick="document.location='#/usage'">
           Cancel
         </button>  

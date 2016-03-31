@@ -4,6 +4,7 @@ function Router () {
   var name   = location.hash.slice(1) || DEFAULT_ROUTE;
       name   = name.replace(/^\//,'')
   var named  = name.split(/\//)
+
   // eg item/1
   if(named.length > 1) {
     ItemsController.render(named[1])    

@@ -25,6 +25,10 @@ table thead tr th{
 .navbar-brand > img{
   display:inline;
 }
+.table tbody tr.trItem:hover{
+  cursor: hand;
+  cursor: pointer;
+}
 /*.panel-heading h3 {
     white-space: nowrap;
     overflow: hidden;

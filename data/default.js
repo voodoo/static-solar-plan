@@ -1,9 +1,12 @@
 var Data = {
- Insolation:         4,
- FudgeFactor:       1.5,
- DepthOfDischarge:   50,
- PanelSize:          250,
- Autonomy:           2,
+ Insolation:          4,
+ FudgeFactor:         1.5,
+ DepthOfDischarge:    50,
+ PanelSize:           250,
+ Autonomy:            2,
+ 
+ CostOfBatteries:           250,
+ CostForGridTiedSystem:        4,
 
  Items:[
     {name: "Fridge", priority: 'Need', watts: 100, hours: 5},

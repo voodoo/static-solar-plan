@@ -13,8 +13,11 @@
   <thead>
     <tr>
       <th>Priority</th>
-      <th>Wh</th>
-      <th width="120">kWh</th>
+      <th>Watt Hours</th>
+      <th title="Recommended Volts">Volts</th>
+      <th> Amp hour </th>
+      <th>kWh</th>
+      <th width="120">Cost</th>
     </tr>
   </thead>
   <tbody>
@@ -22,15 +25,20 @@
   {% for(var i = 0 ; i < prios.length ; i++ ) { %}
     <tr>
       <td>{%= prios[i] %}</td>
-      <td>{%= Watts.sumOfWattsBy(prios[i]).toLocaleString() %}</td>
-      <td title="">
-        {%= ((Watts.sumOfWattsBy(prios[i]) * Watts.battsMultiplier()) / 1000).toLocaleString() %}
+      <td title="Watt Hour = {%= Watts.sumOfBy(prios[i])%}">{%= (Watts.sumOfBy(prios[i]) * Watts.battsMultiplier()).toLocaleString() %}</td>
+      <td title="Panel Watts of {%= Panel.wattsBy(prios[i])%}">{%= Batt.voltsForPanelWatts(Panel.wattsBy(prios[i])) %}</td>
+      <td>{%= Math.ceil(Watts.sumOfBy(prios[i]) / Batt.voltsForPanelWatts(Panel.wattsBy(prios[i])))%}</td>
+      <td title="{%=(Watts.sumOfBy(prios[i]) * Watts.battsMultiplier()) / 1000 %}">
+        {%= Math.ceil((Watts.sumOfBy(prios[i]) * Watts.battsMultiplier()) / 1000) %}
       </td>
+      <td>{%= (Math.ceil((Watts.sumOfBy(prios[i]) * Watts.battsMultiplier()) / 1000) * Db.Data.CostOfBatteries).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %}</td>
     </tr>
   {%}%}   
   </tbody>
   </table>
 </div>
+
+
 
 
 

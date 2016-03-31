@@ -5,7 +5,7 @@
     <a href="#/item/new" 
         class='btn btn-success btn-sm pull-right'>New</a>
     <h3 class="panel-title pull-left">
-      Usage <small>of appliances</small>
+      Usage <small>Calculate Watt Hours</small>
     </h3>
     <div class="clearfix"></div>
   </div>
@@ -28,7 +28,7 @@
     {% var usageItems = Watts.itemsBy(prios[i]) ; %}
     {% if( usageItems.length > 0 ) { %}
       {% for(var ui = 0 ; ui < usageItems.length ; ui++ ){ %}
-        <tr onclick="document.location='#/item/{%= index %}'">
+        <tr onclick="document.location='#/item/{%= index %}'" class="trItem">
           <td >{%= usageItems[ui].name %}</td>
           <td >{%= usageItems[ui].watts %}</td>
           <td >{%= usageItems[ui].hours %}</td>
@@ -47,7 +47,7 @@
             ({%= Watts.byPriority('Need').toLocaleString() %} + {%= Watts.byPriority('Want').toLocaleString() %} + <b>{%= Watts.byPriority('Luxury').toLocaleString() %}</b>)
           {% } %}        
         </td>
-        <td><b>{%= Watts.sumOfWattsBy(prios[i]).toLocaleString() %}</b></td>
+        <td class="total prio-{%= prios[i] %}"><b>{%= Watts.sumOfBy(prios[i]).toLocaleString() %}</b></td>
       </tr>
     {% } %}
 

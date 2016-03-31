@@ -24,3 +24,9 @@
 
 I'm currently using them but am looking for alternatives. 
 They account for 80% of the code for this app and I'd like to bring that figure to 10%.
+
+
+### TODO 
+
+- [ ] Re-org model / controller. State = model != controller
+- [ ] Remove Jquery and Bootstrap

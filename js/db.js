@@ -24,6 +24,8 @@ var Db = {
     var text = $('#txtJson').val();
     var db   = JSON.parse(text);
         this.Data = db
+        // So source order can be maintained
+        ItemsController.orderItems()
         this.save()
         location.reload();
 

@@ -4,7 +4,7 @@
   <div class="panel-heading">
     <div class="pull-right" 
         title="Insolation * PanelSize">
-          Panel Watts: <b>{%= Db.Data.PanelSize * Db.Data.Insolation %}</b>
+          Watt Hours per Panel: <b>{%= Panel.sunWattHours() %}</b>
     </div>
     <h3 class="panel-title">Panels</h3>
   </div>
@@ -12,9 +12,11 @@
   <thead>
     <tr>
       <th>Priority</th>
-      <th>Watts</th>
-      <th>Fudged</th>
+      <th>Watt Hours</th>
+      <th title="x {%= Db.Data.FudgeFactor%}">Adjusted</th>
+      <th title="#  of Panels x Panel size">Panel Watts</th>
       <th width="120"># of Panels</th>
+      <th>Cost</th>
     </tr>
   </thead>
   <tbody>
@@ -22,15 +24,16 @@
   {% for(var i = 0 ; i < prios.length ; i++ ) { %}
     <tr>
       <td>{%= prios[i] %}</td>
-      <td>{%= Watts.sumOfWattsBy(prios[i]).toLocaleString() %}</td>
-      <td>{%= (Watts.sumOfWattsBy(prios[i]) * Db.Data.FudgeFactor).toLocaleString() %}</td>
-      <td>
-        <span title="{%= Watts.numberOfPanels(prios[i]) %}">
-          {%= Math.ceil( Watts.numberOfPanels(prios[i]))%}
-        </span>
-      </td>
+      <td>{%= Watts.sumOfBy(prios[i]).toLocaleString() %}</td>
+      <td>{%= Panel.fudgedWattsBy(prios[i]).toLocaleString() %}</td>
+      <td>{%= Panel.wattsBy(prios[i]).toLocaleString() %}</td>
+      <td>{%= Math.ceil(Panel.numberBy(prios[i]))%}</td>
+      <td>{%= (Panel.wattsBy(prios[i]) * Db.Data.CostForGridTiedSystem).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %}</td>
+
     </tr>
   {%}%}   
   </tbody>
   </table>
 </div>
+
+

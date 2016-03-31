@@ -18,11 +18,18 @@
         include('input-radio', {
             name: 'Autonomy', 
             value: Db.Data.Autonomy, 
-            options: [1,2,3,4,5], 
+            options: [1,1.5,2,2.5,3,4,5], 
             title: 'How many days your batteries can go without sun'
          }); 
       %} 
-
-
+      <hr/>
+      {% 
+        include('input-radio', {
+            name: 'CostOfBatteries', 
+            value: Db.Data.CostOfBatteries, 
+            options: [150, 200, 250, 300, 350, 400, 500], 
+            title: 'Cost of batteries per kWh in Dollars'
+         }); 
+      %} 
   </div>
 </div>      

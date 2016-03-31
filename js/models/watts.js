@@ -11,7 +11,7 @@ var Watts = {
     return watts 
   },  
   // Return watts by priority
-  sumOfWattsBy: function(priority){
+  sumOfBy: function(priority){
     if(priority == 'Want'){
       return this.byPriority('Need') + this.byPriority('Want')
     } else if(priority == 'Luxury'){
@@ -34,7 +34,7 @@ var Watts = {
     return (percent * Db.Data.Autonomy) + 1
   },
   numberOfPanels: function(priority){
-    var fudgedWatts  = this.sumOfWattsBy(priority) * Db.Data.FudgeFactor
+    var fudgedWatts  = this.sumOfBy(priority) * Db.Data.FudgeFactor
     var sunWattHours = Db.Data.Insolation * Db.Data.PanelSize
     return fudgedWatts / sunWattHours
   },

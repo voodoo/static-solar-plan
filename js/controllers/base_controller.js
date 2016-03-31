@@ -5,15 +5,15 @@ var Controller = {
     this.name = name
   },
   render:  function(){
-    $('#view').hide(100)
+    $('#view').hide()
     $('#view').html(tmpl(this.name, Db.Data))
     this.after()
   },
   after: function(){
     this.setRdo()
     this.setNav()
-    $('#view').slideDown(250)
-    //$('#view').fadeIn(800)
+    //$('#view').slideDown(250)
+    $('#view').fadeIn(100)
   },
   setNav: function(){
     $('#navbar li.active').removeClass('active')
