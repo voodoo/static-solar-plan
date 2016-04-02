@@ -5,41 +5,52 @@
      <h3 class="panel-title">Panel Settings</h3>
    </div>
    <div class="panel-body">   
+      {% include('google-it', {search: 'solar panel size'}); %}
 
       {% 
         include('input-radio', {
             name: 'PanelSize', 
+            title: 'Panel size',
             value: Db.Data.PanelSize, 
             options: [50,75,100,150,200,250,275,300,325], 
-            title: 'Size of your panels in watts'
+            info: 'Size of your panels in watts'
          }); 
       %} 
       <hr/>
+      {% include('google-it', {search: 'solar insolation map'}); %}
+
       {% 
         include('input-radio', {
             name: 'Insolation', 
             value: Db.Data.Insolation, 
-            options: [1,2,3,4,5,6], 
-            title: 'Number of hours your region receives'
+            options: [1,2,2.5,3,3.5,4,4.5,5,6], 
+            info: 'Number of hours your region receives'
          }); 
       %} 
       <hr/>
+      {% include('google-it', {search: 'solar fudge factor'}); %}
+
       {% 
         include('input-radio', {
             name: 'FudgeFactor', 
+            title: 'Fudge Factor',
             value: Db.Data.FudgeFactor, 
             options: [1,1.1,1.25,1.4,1.5,1.75,2], 
-            title: 'Acccount for inefficiencies of panels, controller, wiring, etc'
+            info: 'Acccount for inefficiencies of panels, controller, wiring, etc'
          }); 
       %}   
        
       <hr/>
+      {% include('google-it', {search: 'solar cost grid-tied system'}); %}
+
       {% 
         include('input-radio', {
             name: 'CostForGridTiedSystem', 
+            title: 'Cost of grid-tied system',
             value: Db.Data.CostForGridTiedSystem, 
             options: [2,2.5,3,3.5,4,4.5,5], 
-            title: 'Cost of a grid-tied system per panel watt'
+            info: 'Per panel watt in Dollars',
+            hint: "$4 is typical - but you can save money by DIY"
          }); 
       %}   
 

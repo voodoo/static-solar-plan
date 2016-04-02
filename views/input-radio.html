@@ -1,4 +1,7 @@
-<p><label>{%= o.name%}</label> {%= o.title%}</p>
+<p>
+  <label>{%= o.title || o.name%}</label> 
+  {%= o.info%}
+</p>
 <div id="rdo{%= o.name%}" class="btn-group btn-group-justified rdo"
   role="group" 
   aria-label="Justified button group"> 
@@ -11,3 +14,5 @@
         href="#" class="btn btn-{%= option_class%}" role="button">{%= o.options[i] %}</a> 
   {%}%}
 </div>
+<div class="hint" style="color:#ccc;font-size:12px;margin-top:6px">{%= o.hint %}</div>
+

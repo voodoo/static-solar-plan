@@ -1,7 +1,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title" >About Solar Plan</h3>
+    <h3 class="panel-title" >About</h3>
   </div>
   <div class="panel-body">
 
@@ -10,11 +10,17 @@
             class="close" data-dismiss="alert" 
             aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-    I am not an expert. 
-
-    To get expert advise, or hire an installer, please visit 
-    <a href="http://solarreviews.com">solarreviews.com</a>.
-    
+    <h5>I am not an expert</h5>
+    <p>
+       Most of what I've learned has come from the 
+    <a href="http://solarpaneltalk.com" 
+       target="_blank">Solar Panel Talk</a> forum
+    </p>
+    <p>
+    To get expert advice, or hire an installer, please visit 
+    <a href="http://solarreviews.com" target="_blank">SolarVeviews.com</a>
+    </p>
+ 
     </div>
 <!--     
     <dl>
@@ -24,23 +30,15 @@
     </dl>  
 -->      
     <dl>
-      <dt>Goals of Solar Plan</dt>
+      <dt>Goals</dt>
       <dd>
         <ol>
-          <li>Help you estimate your electrial usage/needs</li>
+          <li>Help you estimate, and become mindful of, your electrical usage</li>
           <li>Give a quick but hopefully close estimate of solar size/cost</li>
+          <li>Quickly answer 'what if' type questions</li>
         </ol>
       </dd>
-    </dl>     
-    <dl>
-      <dt>A watt saved is a watt earned</dt>
-      <dd>
-        <em>Conservation first!</em> Every watt you don't have to generate will save you money. 
-        For example, rather than getting a 120v refrigerator that runs on an inverter, get 
-        a DC refrigerator that is more efficient and does not need an inverter. It may seem 
-        like you are saving money getting cheaper equipment/appliances but experience suggests otherwise.
-      </dd>
-    </dl>      
+    </dl>         
     <dl>
       <dt>What tools will I need?</dt>
       <dd>
@@ -69,6 +67,15 @@
       </dd>
     </dl>  
     <dl>
+      <dt>A watt saved is a watt earned</dt>
+      <dd>
+        <em>Conservation first!</em> Every watt you don't have to generate will save you money. 
+        For example, rather than getting a 120v refrigerator that runs on an inverter, get 
+        a DC refrigerator that is more efficient and does not need an inverter. It may seem 
+        like you are saving money getting cheaper equipment/appliances but experience suggests otherwise.
+      </dd>
+    </dl>      
+    <dl>
       <dt>Will I need a generator?</dt>
       <dd>
         Yes - almost always. Especially if you want to be ready for an emergency when the grid goes down (and your grid-tied system does not work).
@@ -96,15 +103,8 @@
         </ol>
       </dd>
     </dl> 
-    <h3> Resources </h3>
-    Most of what I've learned has come from 
-    <a  
-      href="http://solarpaneltalk.com" target="_blank">the Solar Panel Talk forum</a>.
-    <ul>
-      {% var rs =  Resources ;%}
-      {% for(var i = 0 ; i < rs.length ; i++){ %}
-        <li><a href="{%= rs[i][1] %}">{%= rs[i][0] %}</a></li>
-      {% } %}
-    </ul>    
+
+  {% include('resources', o); %}
+  
   </div>
 </div>

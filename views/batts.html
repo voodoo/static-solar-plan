@@ -13,7 +13,7 @@
   <thead>
     <tr>
       <th>Priority</th>
-      <th>Watt Hours</th>
+      <th title="Uses multiplier">Adjusted Watt Hours</th>
       <th title="Recommended Volts">Volts</th>
       <th> Amp hour </th>
       <th>kWh</th>
@@ -25,7 +25,7 @@
   {% for(var i = 0 ; i < prios.length ; i++ ) { %}
     <tr>
       <td>{%= prios[i] %}</td>
-      <td title="Watt Hour = {%= Watts.sumOfBy(prios[i])%}">{%= (Watts.sumOfBy(prios[i]) * Watts.battsMultiplier()).toLocaleString() %}</td>
+      <td title="{%= Watts.sumOfBy(prios[i]).toLocaleString()%} x {%= Watts.battsMultiplier()%}">{%= (Watts.sumOfBy(prios[i]) * Watts.battsMultiplier()).toLocaleString() %}</td>
       <td title="Panel Watts of {%= Panel.wattsBy(prios[i])%}">{%= Batt.voltsForPanelWatts(Panel.wattsBy(prios[i])) %}</td>
       <td>{%= Math.ceil(Watts.sumOfBy(prios[i]) / Batt.voltsForPanelWatts(Panel.wattsBy(prios[i])))%}</td>
       <td title="{%=(Watts.sumOfBy(prios[i]) * Watts.battsMultiplier()) / 1000 %}">
@@ -36,6 +36,10 @@
   {%}%}   
   </tbody>
   </table>
+</div>
+<a href="#" data-toggle="divLearnMore"><i class="glyphicon glyphicon-question-sign "/> Learn More</a>
+<div style="display:none" id="divLearnMore">
+{% include('resources', o); %}
 </div>
 
 

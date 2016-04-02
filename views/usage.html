@@ -15,8 +15,8 @@
       <th>Name</th>
       <th>Watts</th>
       <th>Hours</th>
-      <th title="Need, Want or Luxury">Priority</th>
-
+<!--       <th title="Need, Want or Luxury">Priority</th>
+ -->
       <th width="140">Watt Hours</th>     
     </tr>
   </thead>
@@ -32,19 +32,21 @@
           <td >{%= usageItems[ui].name %}</td>
           <td >{%= usageItems[ui].watts %}</td>
           <td >{%= usageItems[ui].hours %}</td>
-          <td >{%= usageItems[ui].priority %}</td>
           <td >{%= (usageItems[ui].hours * usageItems[ui].watts).toLocaleString() %}</td>
         </tr>
        {% totalWatts += (usageItems[ui].hours * usageItems[ui].watts); %}
        {% index++ ;%}
      {% } %}
      <tr>
-        <td class="subtotal" colspan="4">
+        <td class="subtotal" colspan="3">
+          {% if(prios[i] == 'Need') { %}
+            <b>Need</b>
+          {% } %}        
           {% if(prios[i] == 'Want') { %}
-            ({%= Watts.byPriority('Need').toLocaleString() %} + <b>{%= Watts.byPriority('Want').toLocaleString()%}</b> )
+            ({%= Watts.byPriority('Need').toLocaleString() %} + <b>{%= Watts.byPriority('Want').toLocaleString()%}</b> ) <b>Want</b>
           {% } %}
           {% if(prios[i] == 'Luxury') { %}
-            ({%= Watts.byPriority('Need').toLocaleString() %} + {%= Watts.byPriority('Want').toLocaleString() %} + <b>{%= Watts.byPriority('Luxury').toLocaleString() %}</b>)
+            ({%= Watts.byPriority('Need').toLocaleString() %} + {%= Watts.byPriority('Want').toLocaleString() %} + <b>{%= Watts.byPriority('Luxury').toLocaleString() %}</b>) <b>Luxury</b>
           {% } %}        
         </td>
         <td class="total prio-{%= prios[i] %}"><b>{%= Watts.sumOfBy(prios[i]).toLocaleString() %}</b></td>

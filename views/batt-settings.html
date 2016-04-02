@@ -4,31 +4,37 @@
      <h3 class="panel-title">Battery Settings</h3>
    </div>
    <div class="panel-body">
-
+      {% include('google-it', {search: 'solar battery depth of discharge'}); %}
       {% 
         include('input-radio', {
             name: 'DepthOfDischarge', 
+            title: 'Depth of Discharge',
             value: Db.Data.DepthOfDischarge, 
             options: [10, 20, 30, 40, 50, 60, 70, 80, 90], 
-            title: 'Percentage you intend to discharge your batteries'
+            info: 'Percentage you intend to discharge your batteries'
          }); 
       %}  
       <hr/>
+      {% include('google-it', {search: 'solar battery autonomy'}); %}
+
       {% 
         include('input-radio', {
             name: 'Autonomy', 
             value: Db.Data.Autonomy, 
             options: [1,1.5,2,2.5,3,4,5], 
-            title: 'How many days your batteries can go without sun'
+            info: 'How many days your batteries can go without sun'
          }); 
       %} 
       <hr/>
+      {% include('google-it', {search: 'solar battery cost -tesla'}); %}
+
       {% 
         include('input-radio', {
             name: 'CostOfBatteries', 
+            title: 'Cost of batteries',
             value: Db.Data.CostOfBatteries, 
             options: [150, 200, 250, 300, 350, 400, 500], 
-            title: 'Cost of batteries per kWh in Dollars'
+            info: 'Per kWh in dollars'
          }); 
       %} 
   </div>

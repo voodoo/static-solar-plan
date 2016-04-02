@@ -3,14 +3,13 @@ var Db = {
   init: function(){
     if (!store.enabled) {
         L('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
-        this.Data = Data
     }
     if(store.get('db')){
       this.Data = store.get('db')
     } else {
       L('initting Db.Data')
-      this.Data = Data
-      store.set('db', Data)
+      this.Data = $Data
+      store.set('db', $Data)
     }
   },  
   save: function(data){

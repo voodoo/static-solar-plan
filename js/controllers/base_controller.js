@@ -14,6 +14,8 @@ var Controller = {
     this.setNav()
     //$('#view').slideDown(250)
     $('#view').fadeIn(100)
+    this.setToggle()
+
   },
   setNav: function(){
     $('#navbar li.active').removeClass('active')
@@ -30,5 +32,11 @@ var Controller = {
       Db.save()
       self.render()
     })
+  },
+  setToggle: function(){
+    $('a[data-toggle]').on('click', function(e){
+      e.preventDefault()
+      $('#' + $(this).data('toggle')).toggle()
+    })    
   }
 }

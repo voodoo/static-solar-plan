@@ -1,0 +1,8 @@
+<h3> Resources </h3>
+
+<ul>
+  {% var rs =  Resources ;%}
+  {% for(var i = 0 ; i < rs.length ; i++){ %}
+    <li><a href="{%= rs[i][1] %}">{%= rs[i][0] %}</a></li>
+  {% } %}
+</ul>    

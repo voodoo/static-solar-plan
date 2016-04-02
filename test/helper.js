@@ -1,13 +1,4 @@
 
-function assert(truth, message){
-  if(truth){
-    L("Pass")
-  } else {
-    L("Fail")
-  }
-  L(message)
-}
-
 (function($){
  
 /**

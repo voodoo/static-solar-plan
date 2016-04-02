@@ -5,46 +5,51 @@ var Test = {
       this.resetDb()
       this.run()
       //this.results()
-    } else {
-      L('stopped')
-    }    
-
+    }  
   },
   run: function(){
     // this.tests.push(
     //     {action: "visit usage panel", expectation: "see default plan", result: "fail"},
     //     {action: "click first entry, Fridge", expectation: "see Fridge values", result: "success"}
     
-    document.location = '#/usage'
     $('#pnlUsage').waitUntilExists(function(){
-      Test.tests.push({
-          action: "visit usage panel", 
-          expectation: "see default plan", 
-          result: $(this).find('tr.trItem td')[0].innerHTML == 'Fridge'}
-          )
+      L('beofre')
       $(this).find('tr.trItem')[0].click()
-      $('#frmItem').waitUntilExists(function(){
-        $('input#watts').val(300)
-        $('.btn-primary')[0].click()
-        $('#pnlUsage').waitUntilExists(function(){
-          
-          Test.tests.push({
-              action: "change an items wats", 
-              expectation: "it should show in the summary", 
-              result: $(this).find('tr.trItem td')[1] == 300}
-              )   
-          Test.results()        
-        })
-      })    
     })
+    L('after') //.click()
+
+    // document.location = '#/usage'
+    // $('#pnlUsage').waitUntilExists(function(){
+    //   Test.tests.push({
+    //       action: "visit usage panel", 
+    //       expectation: "see default plan", 
+    //       result: $(this).find('tr.trItem td')[0].innerHTML == 'Fridge'}
+    //       )
+    //   $(this).find('tr.trItem')[0].click()
+    //   $('#frmItem').waitUntilExists(function(){
+    //     $('input#watts').val(300)
+    //     $('.btn-primary')[0].click()
+    //     $('#pnlUsage').waitUntilExists(function(){
+          
+    //       Test.tests.push({
+    //           action: "change an items watts", 
+    //           expectation: "should show in the summary", 
+    //           result: $(this).find('tr.trItem td')[1].innerText == '300'}
+    //           )   
+    //       Test.results()   
+    //       Test.resetDb()     
+    //     })
+    //   })    
+    // })
       
   },
   results: function(){
     $('#view').html(tmpl('test', {tests: this.tests}))
   },
   resetDb: function(){
-    Db.Data = Data
-    store.set('db', Data)
+    Db.Data = $Data
+    store.set('db', Db.Data)
+    L('reset')
   }
 }
 
